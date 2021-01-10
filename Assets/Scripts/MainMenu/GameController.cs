@@ -1,6 +1,6 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -15,11 +15,6 @@ public class GameController : MonoBehaviour
         botAnimator = bot.GetComponent<Animator>();
     }
 
-    void Update()
-    {
-        
-    }
-
     public void BotButtonAwake()
     {
         StartCoroutine(BotAwake());
@@ -28,6 +23,21 @@ public class GameController : MonoBehaviour
     public void BotButtonSleep()
     {
         StartCoroutine(BotSleep());
+    }
+
+    public void LevelSelect1()
+    {
+        SceneManager.LoadScene("Level 1");
+    }
+    
+    public void LevelSelect2()
+    {
+        SceneManager.LoadScene("Level 2");
+    }
+    
+    public void LevelSelect3()
+    {
+        SceneManager.LoadScene("Level 3");
     }
 
     private IEnumerator BotAwake()
