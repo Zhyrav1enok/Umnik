@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using Valve.VR;
 
@@ -12,6 +13,11 @@ namespace LevelOne
         public GameObject gun;
         public GameObject gunOnBot;
         public Animator botAnimator;
+
+        [Header("PlayerUI")] 
+        public List<GameObject> missions = new List<GameObject>();
+        public GameObject playerCanvas;
+        public int currentMission = 0;
         
         void Start()
         {
@@ -31,6 +37,7 @@ namespace LevelOne
             pointer.SetActive(true);
             winUI.SetActive(true);
             gun.SetActive(false);
+            playerCanvas.SetActive(false);
         }
 
         public void Lose()
@@ -38,6 +45,7 @@ namespace LevelOne
             pointer.SetActive(true);
             loseUI.SetActive(true);
             gun.SetActive(false);
+            playerCanvas.SetActive(false);
         }
 
         public void GunOn()
@@ -45,11 +53,15 @@ namespace LevelOne
             gun.SetActive(true);
             gunOnBot.SetActive(false);
             botAnimator.SetTrigger("isPickUp");
+            missions[2].SetActive(false);
+            missions[3].SetActive(true);
         }
 
         public void BotFly2()
         {
             botAnimator.SetTrigger("isBeggin");
+            missions[1].SetActive(false);
+            missions[2].SetActive(true);
         }
 
         public void GoToMenu()

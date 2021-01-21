@@ -1,20 +1,27 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace LevelOne
 {
     public class CrystalManager : MonoBehaviour
     {
+        public Text timerText;
         public Gun gun;
         public GameObject crystalPrefab;
         public float spawnTimeFew = 10f;
         public float spawnTimeMore = 5f;
+        public int countToMoreTime = 10;
         public int countCrystalsToDestroy = 20;
 
         public List<GameObject> crystals = new List<GameObject>();
         private int[,] arr = new int[10, 10];
 
+        public float time = 180;
+        
         void Start()
         {
             StartCoroutine(LifeCrystal());
@@ -30,13 +37,28 @@ namespace LevelOne
             }
 
             arr[5, 5] = 1;
+
+            timerText.gameObject.SetActive(true);
+            timerText.text = time.ToString();
+        }
+
+        private void Update()
+        {
+            time -= Time.deltaTime;
+            timerText.text = Math.Round(time).ToString();
+
+            if (time <= 0)
+            {
+                //StopCoroutine(LifeCrystal());
+                gun.gameController.Lose();
+            }
         }
 
         private IEnumerator LifeCrystal()
         {
             while (gun.countDestroyCrystals <= countCrystalsToDestroy)
             {
-                if (crystals.Count < 5) yield return new WaitForSeconds(spawnTimeFew);
+                if (crystals.Count < countToMoreTime) yield return new WaitForSeconds(spawnTimeFew);
                 else yield return new WaitForSeconds(spawnTimeMore);
                 Vector3 coord = PositionSet();
                 GameObject crystal = Instantiate(crystalPrefab, coord, Quaternion.identity);
