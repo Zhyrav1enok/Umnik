@@ -12,7 +12,6 @@ namespace LevelOne
         public GameObject gun;
         public GameObject gunOnBot;
         public Animator botAnimator;
-        public SteamVR_LoadLevel steamVRLoadLevel;
         
         void Start()
         {
@@ -55,7 +54,9 @@ namespace LevelOne
 
         public void GoToMenu()
         {
-            SteamVR_LoadLevel.Begin("Main menu");
+            //SteamVR_LoadLevel.Begin("Main menu");
+            Destroy(GameObject.Find("Player"));
+            SceneManager.LoadScene("Main menu");
         }
     }
 }

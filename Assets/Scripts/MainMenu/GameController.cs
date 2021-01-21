@@ -29,16 +29,19 @@ namespace MainMenu
     
         public void LevelSelect1()
         {
+            Destroy(GameObject.Find("Player"));
             SceneManager.LoadScene("Level 1");
         }
         
         public void LevelSelect2()
         {
+            Destroy(GameObject.Find("Player"));
             SceneManager.LoadScene("Level 2");
         }
         
         public void LevelSelect3()
         {
+            Destroy(GameObject.Find("Player"));
             SceneManager.LoadScene("Level 3");
         }
     
