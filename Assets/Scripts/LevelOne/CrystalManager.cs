@@ -86,5 +86,10 @@ namespace LevelOne
                 }
             }
         }
+
+        private void OnDestroy()
+        {
+            crystals.Clear();
+        }
     }
 }

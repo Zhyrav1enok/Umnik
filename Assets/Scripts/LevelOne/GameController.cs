@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Valve.VR;
@@ -18,6 +19,9 @@ namespace LevelOne
         public List<GameObject> missions = new List<GameObject>();
         public GameObject playerCanvas;
         public int currentMission = 0;
+
+        [Header("Interactable Item's")]
+        public List<GameObject> items = new List<GameObject>();
         
         void Start()
         {
@@ -67,8 +71,18 @@ namespace LevelOne
         public void GoToMenu()
         {
             //SteamVR_LoadLevel.Begin("Main menu");
+            foreach (var item in items)
+            {
+                Destroy(item);
+            }
             Destroy(GameObject.Find("Player"));
             SceneManager.LoadScene("Main menu");
+        }
+
+        private void OnDestroy()
+        {
+            items.Clear();
+            missions.Clear();
         }
     }
 }
