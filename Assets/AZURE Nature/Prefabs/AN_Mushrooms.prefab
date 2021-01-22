@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4440750357534817279}
   - component: {fileID: 8708275176782889998}
+  - component: {fileID: -8897350326087855577}
   m_Layer: 0
   m_Name: AN_Mushrooms
   m_TagString: Untagged
@@ -56,6 +57,19 @@ LODGroup:
     renderers:
     - renderer: {fileID: 2698875570086092714}
   m_Enabled: 1
+--- !u!65 &-8897350326087855577
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 863546763990780396}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.3, z: 0.5}
+  m_Center: {x: 0, y: 0.15, z: 0}
 --- !u!1 &4867232593898097864
 GameObject:
   m_ObjectHideFlags: 0
