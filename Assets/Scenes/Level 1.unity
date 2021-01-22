@@ -13981,14 +13981,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerText: {fileID: 167455576}
   gun: {fileID: 1513146523}
-  crystalPrefab: {fileID: 826222393306270788, guid: 0f96321c415e6544d8e963eda1a04a1c,
-    type: 3}
   spawnTimeFew: 1
   spawnTimeMore: 3
   countToMoreTime: 10
-  countCrystalsToDestroy: 10
-  crystals: []
+  countCrystalsToDestroy: 50
   time: 180
+  crystalsPrefabs:
+  - {fileID: 826222393306270788, guid: babbaf1f5201ffa4188d7436de9b3353, type: 3}
+  - {fileID: 826222393306270788, guid: 11b664b7f0a1dea46ba8db17ab733e73, type: 3}
+  - {fileID: 826222393306270788, guid: 5e9a56bcdf8a6754d9fbaa1dd5348697, type: 3}
+  - {fileID: 826222393306270788, guid: 0f96321c415e6544d8e963eda1a04a1c, type: 3}
+  crystals: []
 --- !u!4 &1939512010
 Transform:
   m_ObjectHideFlags: 0

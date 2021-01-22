@@ -11,21 +11,28 @@ namespace LevelOne
     {
         public Text timerText;
         public Gun gun;
-        public GameObject crystalPrefab;
         public float spawnTimeFew = 10f;
         public float spawnTimeMore = 5f;
         public int countToMoreTime = 10;
         public int countCrystalsToDestroy = 20;
-
-        public List<GameObject> crystals = new List<GameObject>();
-        private int[,] arr = new int[10, 10];
-
+        
+        [Header("Time to destroy crystals")]
         public float time = 180;
+        
+        [Header("Prefabs of crystals")]
+        public List<GameObject> crystalsPrefabs = new List<GameObject>();
+
+        [HideInInspector]public List<GameObject> crystals = new List<GameObject>();
+        private int[,] arr = new int[10, 10];
+    
+        
+
+        private int _lastPrefab = 0;
         
         void Start()
         {
             StartCoroutine(LifeCrystal());
-            GameObject firstCrystal = Instantiate(crystalPrefab, new Vector3(5, 0, 5f), Quaternion.identity);
+            GameObject firstCrystal = Instantiate(crystalsPrefabs[0], new Vector3(5, 0, 5f), Quaternion.identity);
             crystals.Add(firstCrystal);
 
             for (int i = 0; i < 10; i++)
@@ -61,7 +68,20 @@ namespace LevelOne
                 if (crystals.Count < countToMoreTime) yield return new WaitForSeconds(spawnTimeFew);
                 else yield return new WaitForSeconds(spawnTimeMore);
                 Vector3 coord = PositionSet();
-                GameObject crystal = Instantiate(crystalPrefab, coord, Quaternion.identity);
+
+                int randCryst = 0;
+                bool ok = false;
+                while (!ok)
+                { 
+                    randCryst = Random.Range(0, crystalsPrefabs.Count);
+                    if (randCryst != _lastPrefab)
+                    {
+                        ok = true;
+                        _lastPrefab = randCryst;
+                    }
+                }
+                
+                GameObject crystal = Instantiate(crystalsPrefabs[randCryst], coord, Quaternion.identity);
                 crystals.Add(crystal);
             }
 
@@ -90,6 +110,7 @@ namespace LevelOne
         private void OnDestroy()
         {
             crystals.Clear();
+            crystalsPrefabs.Clear();
         }
     }
 }

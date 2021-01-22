@@ -8,7 +8,7 @@ namespace MainMenu
     {
         public GameObject canvas;
         public GameObject bot;
-    
+        
         private Animator botAnimator;
         
         void Start()
@@ -48,14 +48,15 @@ namespace MainMenu
         private IEnumerator BotAwake()
         {
             botAnimator.SetTrigger("Awake");
-            yield return new WaitForSeconds(1.5f);   // Ждем время анимации бота
+            yield return new WaitForSeconds(5f);
             canvas.SetActive(true);
+            botAnimator.SetTrigger("Active");
         }
         
         private IEnumerator BotSleep()
         {
             botAnimator.SetTrigger("Sleep");
-            yield return new WaitForSeconds(1.5f);   // Ждем время анимации бота
+            yield return new WaitForSeconds(1.25f);
             canvas.SetActive(false);
         }
     }
