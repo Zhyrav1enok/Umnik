@@ -23,7 +23,13 @@ namespace LevelTwo
 
         [Header("Drone")]
         public GameObject drone;
+
+        [Header("SpawnPointsElement")]
+        public List<Transform> spawnPoints = new List<Transform>();
+        public GameObject instanceElement;
+        public float delayOfSearch = 30f;
         #endregion
+
         void Start()
         {
             pointer.SetActive(false);
@@ -40,8 +46,9 @@ namespace LevelTwo
         // -----------------------Tablet game session-----------------------
         IEnumerator ElementLife()
         {
-            // TODO: создание и распределение элемента по дереву
-            yield return null;
+            GameObject element = Instantiate(instanceElement, spawnPoints[Random.Range(0, spawnPoints.Count - 1)].transform.position, Quaternion.identity);
+            yield return new WaitForSeconds(delayOfSearch);
+            Lose();
         }
 
 
@@ -61,6 +68,7 @@ namespace LevelTwo
         // -----------------------Activate UI with win or lose-----------------------
         public void Win()
         {
+            StopAllCoroutines();
             pointer.SetActive(true);
             winUI.SetActive(true);
             tablet.SetActive(false);
@@ -73,6 +81,18 @@ namespace LevelTwo
             loseUI.SetActive(true);
             tablet.SetActive(false);
             playerCanvas.SetActive(false);
+        }
+
+        public void GoToMenu()
+        {
+            Destroy(player);
+            SceneManager.LoadScene("Main menu");
+        }
+
+        private void OnDestroy() 
+        {
+            missions.Clear();
+            StopAllCoroutines();
         }
     }
 }

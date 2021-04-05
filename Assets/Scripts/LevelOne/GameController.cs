@@ -31,11 +31,6 @@ namespace LevelOne
             gun.SetActive(false);
         }
 
-        void Update()
-        {
-        
-        }
-
         public void Win()
         {
             pointer.SetActive(true);
@@ -83,6 +78,7 @@ namespace LevelOne
         {
             items.Clear();
             missions.Clear();
+            StopAllCoroutines();
         }
     }
 }
