@@ -37,6 +37,15 @@ namespace LevelTwo
         
         }
 
+        // -----------------------Tablet game session-----------------------
+        IEnumerator ElementLife()
+        {
+            // TODO: создание и распределение элемента по дереву
+            yield return null;
+        }
+
+
+        // -----------------------Activate tablets on drone and player-----------------------
         public void ElementConnection()
         {
             drone.transform.Find("Tablet").gameObject.SetActive(true);
@@ -45,6 +54,7 @@ namespace LevelTwo
         public void TabletActivationOnPlayer()
         {
             tablet.SetActive(true);
+            StartCoroutine(ElementLife());
         }
 
 
@@ -66,4 +76,3 @@ namespace LevelTwo
         }
     }
 }
-
