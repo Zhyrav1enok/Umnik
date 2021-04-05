@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace LevelTwo
 {
     public class TabletCamera : MonoBehaviour
     {
+        public GameController gameController;
         public Camera tabletCamera;
+        public Slider slider;
 
         void Update()
         {
@@ -16,9 +19,15 @@ namespace LevelTwo
             {
                 if (hit.transform.gameObject.CompareTag("Element"))
                 {
-                    
+                    slider.value += 1f;
+                    if (slider.value == 100)
+                    {
+                        Destroy(hit.transform.gameObject);
+                        gameController.Win();
+                    }
                 }
             }
+            
         }
     }
 }
