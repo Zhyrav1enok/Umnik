@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace LevelTwo
 {
@@ -19,6 +20,8 @@ namespace LevelTwo
         [Header("PlayerUI")] 
         public List<GameObject> missions = new List<GameObject>();
         public GameObject playerCanvas;
+        public Text textTimer;
+
         public int currentMission = 0;
 
         [Header("Drone")]
@@ -43,11 +46,27 @@ namespace LevelTwo
         
         }
 
+        public void NextMission()
+        {
+            missions[currentMission].SetActive(false);
+            currentMission++;
+            missions[currentMission].SetActive(true);
+        }
+
         // -----------------------Tablet game session-----------------------
         IEnumerator ElementLife()
         {
             GameObject element = Instantiate(instanceElement, spawnPoints[Random.Range(0, spawnPoints.Count - 1)].transform.position, Quaternion.identity);
-            yield return new WaitForSeconds(delayOfSearch);
+            textTimer.gameObject.SetActive(true);
+            float stopTime = Time.time + delayOfSearch;
+
+            while (Time.time < stopTime)
+            {
+                textTimer.text = "ТАЙМЕР: " + (int)(stopTime - Time.time);
+
+                yield return new WaitForSeconds(1f);
+            }
+            
             Lose();
         }
 
@@ -56,11 +75,13 @@ namespace LevelTwo
         public void ElementConnection()
         {
             drone.transform.Find("Tablet").gameObject.SetActive(true);
+            NextMission();
         }
 
         public void TabletActivationOnPlayer()
         {
             tablet.SetActive(true);
+            NextMission();
             StartCoroutine(ElementLife());
         }
 
