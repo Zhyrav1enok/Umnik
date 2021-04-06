@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace LevelTwo
 {
@@ -11,11 +9,6 @@ namespace LevelTwo
         void Start()
         {
             tablet.SetActive(false);
-        }
-
-        void Update()
-        {
-            
         }
     }
 }
