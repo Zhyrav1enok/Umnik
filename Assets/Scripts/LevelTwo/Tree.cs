@@ -12,12 +12,13 @@ namespace LevelTwo
         {
             gameController = GameObject.Find("GameController").GetComponent<GameController>();
         }
-
-        private void OnCollisionEnter(Collision other) 
+       
+        private void OnTriggerEnter(Collider other) 
         {
-            if (other.gameObject.CompareTag("Element"))
+            if (other.CompareTag("Element"))
             {
                 gameController.ElementConnection();
+                Destroy(other.gameObject);
             }
         }
     }
