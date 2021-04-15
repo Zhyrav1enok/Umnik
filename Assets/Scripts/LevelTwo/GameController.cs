@@ -14,6 +14,7 @@ namespace LevelTwo
         public GameObject loseUI;
         public GameObject pointer;
         public GameObject tablet;
+        public GameObject element;
         public GameObject player;
         
 
@@ -26,11 +27,13 @@ namespace LevelTwo
 
         [Header("Drone")]
         public GameObject drone;
+        public GameObject elementOnDrone;
 
         [Header("SpawnPointsElement")]
         public List<Transform> spawnPoints = new List<Transform>();
         public GameObject instanceElement;
         public float delayOfSearch = 30f;
+
         #endregion
 
         void Start()
@@ -39,18 +42,21 @@ namespace LevelTwo
             winUI.SetActive(false);
             loseUI.SetActive(false);
             tablet.SetActive(false);
+            element.SetActive(false);
         }
 
-        void Update()
+        public void PickUpElement()
         {
+            NextMission();
+            Destroy(elementOnDrone);
+            element.SetActive(true);
+        }       
         
-        }
-
         public void NextMission()
-        {
+        {            
             missions[currentMission].SetActive(false);
             currentMission++;
-            missions[currentMission].SetActive(true);
+            missions[currentMission].SetActive(true);   
         }
 
         // -----------------------Tablet game session-----------------------

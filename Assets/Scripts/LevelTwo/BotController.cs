@@ -12,10 +12,5 @@ namespace LevelTwo
         {
             tablet.SetActive(false);
         }
-
-        void Update()
-        {
-            
-        }
     }
 }
