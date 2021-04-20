@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-namespace LevelThree
+namespace LevelFour
 {
     public class GameController : MonoBehaviour
     {
@@ -24,13 +24,11 @@ namespace LevelThree
 
         public int currentMission = 0;
 
-        public Material water;
-
-        public GameObject droneCanvas;
-        private Color normalWaterColor = new Color(8, 108, 255);
+        public Material metal;
 
         [Header("Drone")]
         public GameObject elementOnDrone;
+        public GameObject droneCanvas;
 
         public float delayOfGame = 60f;
 
@@ -43,7 +41,7 @@ namespace LevelThree
             loseUI.SetActive(false);
             droneCanvas.SetActive(false);
             element.SetActive(false);
-            normalWaterColor = water.GetColor("_Color1");
+            metal.color = Color.white;
         }
 
         public void NextMission()
@@ -71,7 +69,7 @@ namespace LevelThree
         {
             droneCanvas.SetActive(true);
             pointer.SetActive(true);
-            water.SetColor("_Color1", Color.black);  // Изменяем цвет воды тут-------------
+            metal.color = Color.yellow;    // Изменяем цвет меаллу тут----------------------------
             
             textTimer.gameObject.SetActive(true);
             float stopTime = Time.time + delayOfGame;
@@ -93,7 +91,7 @@ namespace LevelThree
             winUI.SetActive(true);
             playerCanvas.SetActive(false);
             droneCanvas.SetActive(false);
-            water.SetColor("_Color1", normalWaterColor);
+            metal.color = Color.white;
         }
 
         public void Lose()
@@ -107,14 +105,14 @@ namespace LevelThree
 
         public void GoToMenu()
         {
-            water.SetColor("_Color1", normalWaterColor);
+            metal.color = Color.white;
             Destroy(player);
             SceneManager.LoadScene("Main menu");
         }
 
         private void OnDestroy()
         {
-            water.SetColor("_Color1", normalWaterColor);
+            metal.color = Color.white;
             missions.Clear();
             StopAllCoroutines();
         }
