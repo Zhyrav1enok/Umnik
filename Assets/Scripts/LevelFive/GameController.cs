@@ -14,22 +14,27 @@ namespace LevelFive
         public GameObject loseUI;
         public GameObject pointer;
         public GameObject element;
+        public GameObject drill;
         public GameObject player;
 
 
         [Header("PlayerUI")]
         public List<GameObject> missions = new List<GameObject>();
+        public int currentMission = 0;
         public GameObject playerCanvas;
         public Text textTimer;
 
-        public int currentMission = 0;
-
-        //public Material metal;
 
         [Header("Drone")]
         public GameObject elementOnDrone;
-
+        public GameObject drillOnDrone;
         public float delayOfGame = 60f;
+
+
+        [Header("Element")]
+        public GameObject snowPrefab;
+        public List<Transform> SpawnPoints = new List<Transform>();
+        [HideInInspector] public int countElements;
 
         #endregion
 
@@ -39,6 +44,9 @@ namespace LevelFive
             winUI.SetActive(false);
             loseUI.SetActive(false);
             element.SetActive(false);
+            drill.SetActive(false);
+            drillOnDrone.SetActive(false);
+            countElements = SpawnPoints.Count;
         }
 
         public void NextMission()
@@ -51,6 +59,7 @@ namespace LevelFive
         public void StartGame()
         {
             StartCoroutine(Game());
+            drillOnDrone.SetActive(true);
             NextMission();
         }
 
@@ -61,10 +70,20 @@ namespace LevelFive
             element.SetActive(true);
         }
 
+        public void PickUpDrill()
+        {
+            NextMission();
+            Destroy(drillOnDrone);
+            drill.SetActive(true);
+        }
+
         // -----------------------Game session-----------------------
         private IEnumerator Game()
         {
-            
+            for (int i = 0; i < SpawnPoints.Count; i++)
+            {
+                Instantiate(snowPrefab, SpawnPoints[i].position, Quaternion.identity);
+            }
 
             textTimer.gameObject.SetActive(true);
             float stopTime = Time.time + delayOfGame;
@@ -78,6 +97,7 @@ namespace LevelFive
             Lose();
         }
 
+
         // -----------------------Activate UI with win or lose-----------------------
         public void Win()
         {
@@ -85,6 +105,7 @@ namespace LevelFive
             pointer.SetActive(true);
             winUI.SetActive(true);
             playerCanvas.SetActive(false);
+            drill.SetActive(false);
         }
 
         public void Lose()
@@ -93,6 +114,7 @@ namespace LevelFive
             pointer.SetActive(true);
             loseUI.SetActive(true);
             playerCanvas.SetActive(false);
+            drill.SetActive(false);
         }
 
         public void GoToMenu()

@@ -30,19 +30,31 @@ namespace MainMenu
         public void LevelSelect1()
         {
             Destroy(GameObject.Find("Player"));
-            SceneManager.LoadScene("Level 1");
+            SceneManager.LoadScene("LevelOne");
         }
         
         public void LevelSelect2()
         {
             Destroy(GameObject.Find("Player"));
-            SceneManager.LoadScene("Level 2");
+            SceneManager.LoadScene("LevelTwo");
         }
         
         public void LevelSelect3()
         {
             Destroy(GameObject.Find("Player"));
-            SceneManager.LoadScene("Level 3");
+            SceneManager.LoadScene("LevelThree");
+        }
+
+        public void LevelSelect4()
+        {
+            Destroy(GameObject.Find("Player"));
+            SceneManager.LoadScene("LevelFour");
+        }
+
+        public void LevelSelect5()
+        {
+            Destroy(GameObject.Find("Player"));
+            SceneManager.LoadScene("LevelFive");
         }
     
         private IEnumerator BotAwake()

@@ -9,6 +9,8 @@ TagManager:
   - Tree
   - UI
   - Element
+  - Earth
+  - Drill
   layers:
   - Default
   - TransparentFX
